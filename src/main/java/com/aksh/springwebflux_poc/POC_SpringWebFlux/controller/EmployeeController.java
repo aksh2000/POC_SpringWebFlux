@@ -1,0 +1,54 @@
+package com.aksh.springwebflux_poc.POC_SpringWebFlux.controller;
+
+import com.aksh.springwebflux_poc.POC_SpringWebFlux.service.EmployeeService;
+import com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.constants.ApiPath;
+import com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.models.entity.Employee;
+import com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.models.request.CreateEmployeeRequest;
+import com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.models.request.UpdateEmployeeRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@CrossOrigin
+@RequestMapping(ApiPath.BASE_URL)
+public class EmployeeController {
+    @Autowired
+    private EmployeeService employeeService;
+
+    @PostMapping(ApiPath.EMPLOYEE)
+    Mono<Boolean> createEmployee(@RequestBody CreateEmployeeRequest createEmployeeRequest) {
+        return employeeService.createEmployee(createEmployeeRequest);
+    }
+
+    @GetMapping(ApiPath.EMPLOYEE + ApiPath.EMPLOYEE_ID)
+    Mono<Employee> getEmployeeById(@PathVariable("id") String id) {
+        return employeeService.getEmployeeById(id);
+    }
+
+    @GetMapping(ApiPath.EMPLOYEE + ApiPath.NAME + ApiPath.EMPLOYEE_NAME)
+    Flux<Employee> getEmployeesByName(@PathVariable("name") String name) {
+        return employeeService.getEmployeeDetailsByName(name);
+    }
+
+    @PutMapping(ApiPath.EMPLOYEE)
+    Mono<Boolean> updateEmployeeDetails(@RequestBody UpdateEmployeeRequest updateEmployeeRequest) {
+        return employeeService.updateEmployee(updateEmployeeRequest);
+    }
+
+    @DeleteMapping(ApiPath.EMPLOYEE + ApiPath.EMPLOYEE_ID)
+    Mono<Boolean> deleteEmployee(@PathVariable("id") String id) {
+        return employeeService.deleteEmployee(id);
+    }
+}
