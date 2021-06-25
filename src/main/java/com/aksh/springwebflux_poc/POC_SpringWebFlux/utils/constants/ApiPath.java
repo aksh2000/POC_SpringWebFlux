@@ -6,4 +6,5 @@ public class ApiPath {
     public static final String NAME = "/name";
     public static final String EMPLOYEE_ID = "/{id}";
     public static final String EMPLOYEE_NAME = "/{name}";
+    public static final String DUMP_SAVE = "/dumpsave";
 }

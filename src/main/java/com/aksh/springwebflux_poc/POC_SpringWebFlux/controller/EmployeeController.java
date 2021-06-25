@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
 @CrossOrigin
 @RequestMapping(ApiPath.BASE_URL)
+@Slf4j
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -51,4 +53,14 @@ public class EmployeeController {
     Mono<Boolean> deleteEmployee(@PathVariable("id") String id) {
         return employeeService.deleteEmployee(id);
     }
+
+    @PostMapping(ApiPath.DUMP_SAVE)
+    void dumpSaveUsersToDB(){
+        for(int i =0; i<100000; i++){
+            employeeService.createEmployee(CreateEmployeeRequest.builder()
+            .name("name")
+            .email("test@email.com")
+            .build());
+        }
+    } 
 }
