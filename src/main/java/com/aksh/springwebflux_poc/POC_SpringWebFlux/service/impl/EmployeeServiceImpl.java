@@ -8,10 +8,12 @@ import com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.models.request.CreateE
 import com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.models.request.UpdateEmployeeRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
