@@ -6,6 +6,6 @@ import org.springframework.web.reactive.config.WebFluxConfigurerComposite;
 
 @Configuration
 @EnableWebFlux
-public class Webflux extends WebFluxConfigurerComposite{
-    
+public class Webflux extends WebFluxConfigurerComposite {
+
 }
