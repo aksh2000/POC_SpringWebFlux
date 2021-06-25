@@ -1,10 +1,14 @@
 package com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.models.request;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateEmployeeRequest {
     private String id;
     private String name;
