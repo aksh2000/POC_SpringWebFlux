@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -32,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Flux<Employee> getEmployeeDetailsByName(String name) {
-        return employeeRepository.findByName(name);
+        return employeeRepository.findByName(name).subscribeOn(Schedulers.elastic());
     }
 
     @Override

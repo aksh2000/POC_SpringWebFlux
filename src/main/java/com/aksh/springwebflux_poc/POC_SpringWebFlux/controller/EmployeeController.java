@@ -7,6 +7,7 @@ import com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.models.request.CreateE
 import com.aksh.springwebflux_poc.POC_SpringWebFlux.utils.models.request.UpdateEmployeeRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,7 @@ public class EmployeeController {
         return employeeService.getEmployeeById(id);
     }
 
-    @GetMapping(ApiPath.EMPLOYEE + ApiPath.NAME + ApiPath.EMPLOYEE_NAME)
+    @GetMapping(value = ApiPath.EMPLOYEE + ApiPath.NAME + ApiPath.EMPLOYEE_NAME, produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<Employee> getEmployeesByName(@PathVariable("name") String name) {
         return employeeService.getEmployeeDetailsByName(name);
     }
@@ -56,7 +57,7 @@ public class EmployeeController {
 
     @PostMapping(ApiPath.DUMP_SAVE)
     void dumpSaveUsersToDB(){
-        for(int i =0; i<100000; i++){
+        for(int i =0; i<100000000; i++){
             employeeService.createEmployee(CreateEmployeeRequest.builder()
             .name("name")
             .email("test@email.com")
