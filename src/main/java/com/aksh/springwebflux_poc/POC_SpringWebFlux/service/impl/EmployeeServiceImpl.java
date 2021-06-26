@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Flux<Employee> getEmployeeDetailsByName(String name) {
-        return employeeRepository.findByName(name).subscribeOn(Schedulers.elastic());
+        return employeeRepository.findByName(name).subscribeOn(Schedulers.boundedElastic());
     }
 
     @Override
